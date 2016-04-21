@@ -1,0 +1,9 @@
+.main {
+    margin-top: 35px;
+}
+
+
+.logo:hover {
+    text-decoration: none;
+    color: black;
+}
