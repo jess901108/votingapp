@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname,'public')));
 // Setup routes
 app.use('/',home);
 app.use('/users',users);
-// app.use('/polls',polls);
+app.use('/polls',polls);
 
 
 app.listen(port,function(){
