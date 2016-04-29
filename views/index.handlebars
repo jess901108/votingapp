@@ -1,15 +1,13 @@
 <div class="well text-center pad">
     <div>
-    <h1>Polls</h1>
+    <h1>{{title}}</h1>
     <p class="lead">View all polls down below </p>
     <p>You can view and vote any current polls, you can also <a href="/users/login">Login</a> or <a href="/users/signup">Sign up</a> to create/delete your own polls.</p>
     </div>
     
     <div class="list-group">
-    <a href="/polls/test" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-    <a href="#" class="list-group-item">Morbi leo risus</a>
-    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-    <a href="#" class="list-group-item">Vestibulum at eros</a>
+    {{#each votes}}
+    <a href="/polls/{{this._id}}" class="list-group-item">{{this.pollName}}</a>
+    {{/each}}
     </div>
 </div>

@@ -1,15 +1,13 @@
 <div class="well pad">
     <div class="row">
         <div class="col-md-3 col-md-offset-1">
-            <form>
+            <form method="POST" action="/polls/{{data._id}}">
               <fieldset class="form-group">
-                <label for="exampleSelect1">Example select</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <label for="selectOptions">{{data.pollName}}</label>
+                <select class="form-control" id="selectOptions" name="selectPicker">
+                  {{#each data.options}}
+                  <option>{{this.option}}</option>
+                  {{/each}}
                 </select>
               </fieldset>
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -19,7 +17,59 @@
         
         <div class="col-md-4 col-md-offset-2">
             <canvas id="myChart" width="400" height="400"></canvas>
-            <button class="btn btn-danger btn-block">Delete</button>
+            <a class="btn btn-danger btn-block" onclick="deletePoll('{{{data._id}}}')">Delete</a>
         </div>
     </div>
 </div>
+
+ <script>
+    
+     function deletePoll(id){
+         if (confirm("Do you really want to delete this poll?")==true){
+                $.ajax({
+                    url:"/polls/"+id,
+                    method:'DELETE',
+                    success:function(data){
+                        alert('Delete success!')
+                    }
+                });
+         }else {
+             return;
+         }
+     }
+     
+ 
+ 
+      var options = [],votes = [],colors=[],hovers=[];
+      "{{#each data.options}}";
+      var o = "{{{this.option}}}";
+      var v = "{{{this.votes}}}";
+      var c = "{{{this.color}}}";
+      var h = "{{{this.hover}}}";
+      options.push(o);
+      votes.push(Number(v));
+      colors.push(c);
+      hovers.push(h);
+      "{{/each}}";
+  
+// console.log(colors,"and",hovers);
+             
+var data = {
+	labels: options,
+	datasets: [{
+		data: votes,
+		backgroundColor: colors,
+		hoverBackgroundColor: hovers
+	}]
+};
+
+var ctx = document.getElementById("myChart").getContext("2d");
+var myChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: data,
+		options: {
+			cutoutPercentage: 50
+		}
+});
+             
+ </script>
