@@ -111,8 +111,6 @@ app.route('/poll/:id')
         console.log(req.flash);
         Vote.remove({_id:req.params.id},function(err,doc){
             if (err) throw err;
-            // res.json(err? 'err' : 'ok');
-            // console.log(res);
             res.redirect('/');
         });
     });
