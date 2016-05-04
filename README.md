@@ -1,5 +1,10 @@
-# Practice Voting App
+# Voting App
+Here is the link to the app:
+
+    https://poll-voting.herokuapp.com/
+
 ## Introduction
+
 This is a practice Poll app with functions as followed:
 * All users can view all the polls and vote their option
 * All users can add options at any Polls with their own choice
