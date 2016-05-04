@@ -1,0 +1,16 @@
+<div class="well text-center pad">
+    <div>
+    <h1>Hello {{user.displayName}}!</h1>
+    <p class="lead">View or modify your polls down below </p>
+    </div>
+    
+    <div class="list-group">
+    {{#if myPolls}}
+    {{#each myPolls}}
+    <a href="/poll/{{{this._id}}}" class="list-group-item">{{this.pollName}}</a>
+    {{/each}}
+    {{else}}
+    <p>You do not have any polls, <a href="/create/{{user.githubId}}">Create</a> one right now !</p>
+    {{/if}}
+    </div>
+</div>

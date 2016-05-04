@@ -1,23 +1,30 @@
 <div class="well pad">
     <div class="row">
         <div class="col-md-3 col-md-offset-1">
-            <form method="POST" action="/polls/{{data._id}}">
+            <form method="POST" action="/poll/{{poll._id}}">
               <fieldset class="form-group">
-                <label for="selectOptions">{{data.pollName}}</label>
-                <select class="form-control" id="selectOptions" name="selectPicker">
-                  {{#each data.options}}
-                  <option>{{this.option}}</option>
+                <label for="selectOptions">{{poll.pollName}}</label>
+                <select class="form-control" id="selectOptions" name="selectPicker" onchange="addFunc(this)">
+                  {{#each poll.options}}
+                  <option value="{{{this.option}}}">{{this.option}}</option>
                   {{/each}}
+                  <option value="add">I don't like these options</option>
                 </select>
               </fieldset>
+              <div class="form-group hide add">
+                    <label>Add a custome option</label>
+                    <input type="text" class="form-control" name="addOption" placeholder="Type your option">
+              </div>
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
-              <button class="btn btn-info btn-block">Share on twitter</button>
+              <a class="btn btn-info btn-block" href="https://twitter.com/intent/tweet?text={{{poll.pollName}}}">Tweet this poll</a>
             </form>
         </div>
         
         <div class="col-md-4 col-md-offset-2">
             <canvas id="myChart" width="400" height="400"></canvas>
-            <a class="btn btn-danger btn-block" onclick="deletePoll('{{{data._id}}}')">Delete</a>
+            {{#if isOwner}}
+            <a class="btn btn-danger btn-block" onclick="deletePoll('{{{poll._id}}}')">Delete</a>
+            {{/if}}
         </div>
     </div>
 </div>
@@ -27,7 +34,7 @@
      function deletePoll(id){
          if (confirm("Do you really want to delete this poll?")==true){
                 $.ajax({
-                    url:"/polls/"+id,
+                    url:"/poll/"+id,
                     method:'DELETE',
                     success:function(data){
                         alert('Delete success!')
@@ -38,10 +45,19 @@
          }
      }
      
+     function addFunc(self){
+         var value = self.value;
+         if (value == "add"){
+             $('.add').removeClass('hide');
+         }else {
+             $('.add').addClass('hide');
+         }
+     }
+     
  
  
       var options = [],votes = [],colors=[],hovers=[];
-      "{{#each data.options}}";
+      "{{#each poll.options}}";
       var o = "{{{this.option}}}";
       var v = "{{{this.votes}}}";
       var c = "{{{this.color}}}";

@@ -7,18 +7,20 @@ flash = require('connect-flash'),
 session = require('express-session'),
 passport = require('passport'),
 mongoose = require('mongoose'),
-home = require('./routes/index'),
-polls = require('./routes/polls');
+routes = require('./routes/index');
 
 // App init
 var app = express();
 
 // Global variables
 var port = process.env.PORT || 3000;
-app.locals.title = "Polls";//testing locals for variable setting.
+
+
+// config passport
+require('./config/passportGit')(passport);
 
 // Database connect
-mongoose.connect('mongodb://votdb1p:votdb1ppsw@ds028679.mlab.com:28679/votingdb');
+mongoose.connect('mongodb://fccjess:fccmengjie@ds011872.mlab.com:11872/voting');
 
 // BodyParser Middleware
 app.use(bodyParser.json());
@@ -29,8 +31,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
     secret:"secretVoting",
     saveUninitialized: true,
-    resave: true
+    resave: false
 }));
+
 
 // passport initialization & session
 app.use(passport.initialize());
@@ -50,16 +53,12 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // Set up global variables
 app.use(function(req,res,next){
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     next();
 });
 
 // Setup routes
-app.use('/',home);
-app.use('/polls',polls);
+routes(app,passport);
 
 
 app.listen(port,function(){

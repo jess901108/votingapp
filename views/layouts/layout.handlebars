@@ -21,13 +21,18 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li><a href="/">All polls</a></li>
-            <li><a href="/polls/create">Create New</a></li>
-            <li><a href="/polls/me/{{data.user.email}}">My Polls</a></li>
-            <li><a href="/users/signup">Sign up</a></li>
-            <li><a href="/users/login">Login</a></li>
+            {{#if user}}
+            <li><a href="/myPolls/{{user.githubId}}">My Polls</a></li>
+            <li><a href="/create/{{user.githubId}}">Create New</a></li>
+            <li><a href="/logout">{{user.displayName}} Logout</a></li>
+            {{else}}
+            <li><a href="/auth/github">Login with Github</a></li>
+            {{/if}}
+            
+            
           </ul>
         </nav>
-        <h3><a class="text-muted logo" href="/">Voting App </a></h3>
+        <h3 class="text-muted">Voting App </h3>
       </div>
         
         <div class="row">
@@ -36,12 +41,11 @@
           </div>
         </div>
 
-        
-      </div>
-
       <footer class="footer text-center">
         <p>&copy; 2016 Mengjie Yu</p>
       </footer>
+      
     </div> <!-- /container -->
+    
     </body>
 </html>

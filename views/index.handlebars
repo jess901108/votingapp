@@ -1,13 +1,22 @@
 <div class="well text-center pad">
     <div>
-    <h1>{{title}}</h1>
+    <h1>Polls</h1>
+    
     <p class="lead">View all polls down below </p>
-    <p>You can view and vote any current polls, you can also <a href="/users/login">Login</a> or <a href="/users/signup">Sign up</a> to create/delete your own polls.</p>
+    {{#if user}}
+    <p>Vote on any polls, or <a href="/create/{{user.githubId}}">create</a> your own polls</p>
+    {{else}}
+    <p>You can view and vote any current polls, you can also <a href="/auth/github">Login with Github</a> to create/delete your own polls.</p>
+    {{/if}}
     </div>
     
     <div class="list-group">
-    {{#each votes}}
-    <a href="/polls/{{this._id}}" class="list-group-item">{{this.pollName}}</a>
+    {{#if polls}}
+    {{#each polls}}
+    <a href="/poll/{{{this._id}}}" class="list-group-item">{{this.pollName}}</a>
     {{/each}}
+    {{else}}
+    <p>There are no polls in our records, <a href="/create/{{user.githubId}}">create</a> the first one! </p>
+    {{/if}}
     </div>
 </div>
