@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "engines":{
+    "node": "4.4.0"
+  },
   "author": "Jessica Yu <jess901108@gmail.com>",
   "license": "ISC",
   "dependencies": {

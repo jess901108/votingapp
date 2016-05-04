@@ -19,5 +19,6 @@ This is a practice Poll app with functions as followed:
 ## To-do List
 - Add more Login options
 - Fixed Each person/IP can only vote for one option in a poll
+- Add Flash messages
 ## Licence
 [ISC](https://opensource.org/licenses/ISC)
