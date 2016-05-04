@@ -22,7 +22,7 @@ var port = process.env.PORT || 3000;
 require('./config/passportGit')(passport);
 
 // Database connect
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect("mongodb://fccjess:fccmengjie@ds011872.mlab.com:11872/voting");
 
 // BodyParser Middleware
 app.use(bodyParser.json());

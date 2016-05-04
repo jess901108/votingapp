@@ -15,9 +15,9 @@ module.exports = function (passport) {
 	});
 
 	passport.use(new GitHubStrategy({
-		clientID: process.env.GITHUB_KEY,
-		clientSecret: process.env.GITHUB_SECRET,
-		callbackURL: process.env.CALLBACK_URL
+		clientID: "2bae9390800e501304e3",
+		clientSecret: "5c6be3fed1f1ee790b834b0b60f21f43b7f941eb",
+		callbackURL: "https://poll-voting.herokuapp.com/auth/github/callback"
 	},
 	function (token, refreshToken, profile, done) {
 		process.nextTick(function () {
