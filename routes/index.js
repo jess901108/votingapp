@@ -96,17 +96,23 @@ app.route('/poll/:id')
                }
            });
            }
+           var owner = false;
+           if (req.user && (req.user.githubId == vote.githubId)){
+                owner = true;
+            }
            
            vote.save(function(err,data){
                if (err) throw err;
-               res.render('poll',{poll:data});
+               res.render('poll',{poll:data,isOwner:owner});
            });
         });
     })
     .delete(function(req,res){
+        console.log(req.flash);
         Vote.remove({_id:req.params.id},function(err,doc){
             if (err) throw err;
-            res.json(err? 'err' : 'ok');
+            // res.json(err? 'err' : 'ok');
+            // console.log(res);
             res.redirect('/');
         });
     });

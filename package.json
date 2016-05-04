@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Jessica Yu <jess901108@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
@@ -19,6 +19,7 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "method-override": "^2.3.5",
     "mongodb": "*",
     "mongoose": "*",
     "passport": "*",

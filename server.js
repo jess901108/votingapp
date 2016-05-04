@@ -4,6 +4,7 @@ path = require('path'),
 bodyParser = require('body-parser'),
 exphbs = require('express-handlebars'),
 flash = require('connect-flash'),
+methodOverride = require('method-override'),
 session = require('express-session'),
 passport = require('passport'),
 mongoose = require('mongoose'),
@@ -25,6 +26,9 @@ mongoose.connect('mongodb://fccjess:fccmengjie@ds011872.mlab.com:11872/voting');
 // BodyParser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+// Method override using POST with Delete
+app.use(methodOverride('_method'));
 
 
 // session
