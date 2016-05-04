@@ -12,6 +12,7 @@ routes = require('./routes/index');
 
 // App init
 var app = express();
+require('dotenv').load();
 
 // Global variables
 var port = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ var port = process.env.PORT || 3000;
 require('./config/passportGit')(passport);
 
 // Database connect
-mongoose.connect('mongodb://fccjess:fccmengjie@ds011872.mlab.com:11872/voting');
+mongoose.connect(process.env.MONGO_URI);
 
 // BodyParser Middleware
 app.use(bodyParser.json());
